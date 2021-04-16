@@ -145,11 +145,36 @@ metadata <- metadata[which(metadata$RNA.seq.Batch != 3),]
 # remove sampel in batch 3
 Biopsies_readcount <- Biopsies$expected_count[,row.names(metadata)]
 library("DESeq2")
-dds <- DESeqDataSetFromMatrix(countData = round(Biopsies$expected_count), 
+dds <- DESeqDataSetFromMatrix(countData = round(Biopsies_readcount), 
                               colData = metadata, design = ~ Biopsies_type)
 dds2 <- estimateSizeFactors(dds)
 norm_data_biopsies <- counts(dds2,normalized=TRUE)
+norm_data_biopsies_v1    <- get.remove_gene_low_express(norm_data_biopsies, 0)
 
+# DE lncRNA in biopsies ---------------------------------------------------
+dds3 <- DESeq(dds, quiet=TRUE)
+
+# compare "LateCardiotoxicity_with_ANT" vs. "Control"
+res <- results(dds3, contrast = c("Biopsies_type", "LateCardiotoxicity_with_ANT", "Control"), 
+               pAdjustMethod = "BH")
+res.full <- as.data.frame(res)
+biopsies_ANTvsCon <-subset(res.full,res.full$padj <= 0.01) # 37 DE genes
+biopsies_ANTvsCon_lncRNA <- get.lncRNA(biopsies_ANTvsCon) # 5 DE lncRNAs
+#write.table(rownames(biopsies_ANTvsCon), "DEgenes_biopsies.txt",
+#            row.names=F,col.names=F,sep="\t", quote=FALSE)
+
+Overlap_invitro_biopsies <- intersect(row.names(biopsies_ANTvsCon), unlist(ANTs_venn))
+a<-unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% Overlap_invitro_biopsies)])
+unique(Ensemble_database$Gene.type[which(Ensemble_database$Gene.stable.ID %in% Overlap_invitro_biopsies)])
+
+unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% biopsies_ANTvsCon_lncRNA)])
+
+write.table(Overlap_invitro_biopsies, "DEgenes_Overlap_invitro_biopsies.txt",
+            row.names=F,col.names=F,sep="\t", quote=FALSE)
+
+#intersect(row.names(biopsies_ANTvsCon), ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`)
+
+## stop here -----------------------------------------------------
 # Figure 1 B: PCA plot for biopsies data: low percetage --> mor to dendrgraom? --------------
 norm_data_biopsies_v1    <- get.remove_gene_low_express(norm_data_biopsies, 0)
 get.pca(t(norm_data_biopsies_v1 ), 
@@ -187,8 +212,11 @@ for(drug in names(drug_outcome)) {
 #write.table(Ensemble_database$Gene.stable.ID, "Genes_background.txt",
 #            row.names=F,col.names=F,sep="\t", quote=FALSE)
 
-# FIgure 1D: Pie chart - overlapped differentially expressed genes --------------------------
+# Figure 1D: Pie chart - overlapped differentially expressed genes --------------------------
 ANTs_venn <-get.vennDiam(drug_ImpulseDE2Result, names(drug_ImpulseDE2Result))
+#write.table(ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`, "DEgenes_ANTs.txt",
+#            row.names=F,col.names=F,sep="\t", quote=FALSE)
+
 get.summary_gene_type(ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`)
 
 Overlap_DE_database <- get.selected_data(ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`,
@@ -237,7 +265,7 @@ library(tidyverse)
 ggplot(data = top_pathways) + geom_point(mapping = aes(x=-log(p.value,10), y=pathway, size = genes)) +
   xlab("-log10(p.value)") + xlim(0, 40)
 
-# Figure 2.B: gene types in the pathway anayslis outcome: --> different result
+# Figure 2.B: gene types in the pathway anayslis outcome: --> different result ----------------
 gene_list<- unique(gsub(" ", "", unlist(strsplit(top_pathways$members_input_overlap, ";")),fixed = TRUE))
 gene_list_database <- get.selected_data(gene_list, Ensemble_database, "Gene.stable.ID")
 gene_list_summary <- get.summary_gene_type(gene_list_database)
@@ -248,22 +276,21 @@ gene_types <- c(gene_list_summary["protein_coding",], "lncRNA" = 0,
                           "other_genes" = other_genes)
 get.pie_chart(gene_types, names(gene_types))
 
-
-# in ANTs: DOX_The, EPI_The, IDA_The, DOX_Tox, EPI_Tox, IDA_Tox 
+# Table 1: The DE lncRNAs in different ANT treatment conditions --------------------------------
 ANTs_venn <-get.vennDiam(drug_ImpulseDE2Result, names(drug_ImpulseDE2Result))
-ANTs_venn <-get.geneTypes_overlapLncRNA(Ensemble_database, ANTs_venn[[length(ANTs_venn)]])
 
+conditions <- c("DOX_The:EPI_The:IDA_The", "DOX_Tox:EPI_Tox:IDA_Tox",
+                "DOX_The:DOX_Tox", "EPI_The:EPI_Tox", "IDA_The:IDA_Tox",
+                "DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox")
+DE_lncRNAs_conditions <- list()
+for (i in conditions) {
+  data_tem <- as.data.frame(ANTs_venn[[i]])
+  row.names(data_tem) <- data_tem[,1]
+  lncRNA_tem <- get.lncRNA(data_tem)
+  DE_lncRNAs_conditions[[i]] <- unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% lncRNA_tem)])
+}
 
-Overlap_DE_protein_lncRNA_gene <- ANTs_venn$Sum_GeneType[c("protein_coding", "lncRNA"),]
-Overlap_Other_DE_genes <- sum(ANTs_venn$Sum_GeneType) - sum(Overlap_DE_protein_lncRNA_gene)
-Overlap_DE_genes <- c(Overlap_DE_protein_lncRNA_gene, Overlap_Other_DE_genes)
-DE_gene_types <- cbind(DE_gene_types, Overlap_DE_genes)
-
-Total <- colSums(DE_gene_types)
-DE_gene_types <- rbind(DE_gene_types, Total)
-library("xlsx")
-write.xlsx(DE_gene_types, file = "outcome.xlsx", sheetName = "DE_gene_types", 
-           col.names = TRUE, row.names = TRUE, append = TRUE)
+# stop here ----------------------------
 # bar chart
 #par(mar=c(5,5,5,1))
 #barplot(DE_gene_types, las = 1, cex.names = .9, col = c("orange","light green", "blue"),
