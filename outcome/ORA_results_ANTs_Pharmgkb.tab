@@ -1,0 +1,4 @@
+p-value	q-value	pathway	source	external_id	members_input_overlap	members_input_overlap_geneids	size	effective_size
+0.00922143478597	0.13832152179	Abacavir Pathway, Pharmacokinetics/Pharmacodynamics	PharmGKB	PA166104634	ENSG00000143774; ENSG00000102144; ENSG00000243678	2987; 5230; 4831	14	14
+0.0194544384512	0.145908288384	Oxidative Stress Regulatory Pathway (Erythrocyte)	PharmGKB	PA165980399	ENSG00000167815; ENSG00000233276	7001; 2876	7	7
+0.04049165681	0.20245828405	Doxorubicin Pathway (Cardiomyocyte Cell), Pharmacodynamics	PharmGKB	PA165292164	ENSG00000169020; ENSG00000124172; ENSG00000007171	514; 521; 4843	24	24

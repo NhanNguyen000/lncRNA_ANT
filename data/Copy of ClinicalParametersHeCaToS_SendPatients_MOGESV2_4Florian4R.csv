@@ -1,0 +1,48 @@
+SID,Patient_group,HeCaToS_Status,Matched _to_SID,Biopsies send,Year_of_birth,Sex,Sex_numerical,Lenght,Weight,BMI,LVEF,LVEDD,LVESD,LV_mass_index,Cancer_type,BreastCancer_YN,BloodCancer_YN,Lymphoma_YN,Chemotherapeutic_agents,Radiotherapy_YN,Chemo_doxorubicin_YN,Chemo_daunorubicin_YN,Chemo_epirubicin_YN,Chemo_cyclophosphamide_YN,Chemo_5FU_YN,Chemo_Dacarbazin_YN,Chemo_docetaxel_YN,Chemo_tamoxifen_YN,Chemo_Cytarabine_YN,Chemo_tosedostat_YN,Chemo_Vincristine_YN,Chemo_bleomycin_YN,Immuno_Prednison_YN,Immuno_everolimus_YN,Immuno_rituximab_YN,Virus_in_biopsy,Viral _opiesPerMcgDNA_absolute,PVB19_YN,HHV6_YN,EBV_YN,Collagen_volume_fraction_biopsy,Inflammation_biopsy_YN,Inflammatory_cells _biopsy,Genetic_mutation,Comorbidities,Death,,M,O ,G,E,S,NYHA_numerical,END
+614,1,1,10059,Yes,1946,female,2,165,62,23,33,60,49,99999,Breast cancer,1,0,0,"Doxorubicin, cyclophosphamide, 5-fluorouracil (=5-FU)",0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,PVB19 (<200),200,1,0,0,18,No,7,SCN5A (pathogenic),None,No,,D,0,AR,T,II,2,END
+10027,1,1,10021,Yes,1949,female,2,170,86,30,20,65,59,121,Breast cancer,1,0,0,"Doxorubicin, epirubicin, tamoxifen",0,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,PVB19 (492),492,1,0,0,17,Yes,26,(TTN (variant of unknown significance)),None,Yes,,D,0,0,"T,V,AI",III,3,END
+10096,1,1,10033,Yes,1945,male,1,176,101,33,22,58,50,88,Non-Hodgkin lymphoma,0,0,1,"Doxorubicin, cyclophosphamide, rituximab, vincristin, prednison",0,1,0,0,1,0,0,0,0,0,0,1,0,1,0,1,PVB19 (<200),200,1,0,0,99999,No,99999,Unknown,"Diabetes (type II), hypertension, history of alcoholabuse",No,,0,0,0,T,III,3,END
+10130,1,1,562,Yes,1958,female,2,182,95,29,44,55,43,93,Breast cancer,1,0,0,"Doxorubicin, cyclophosphamide, rituximab, vincristin, prednison",0,1,0,0,1,0,0,0,0,0,0,1,0,1,0,1,PVB19 (1829),1829,1,0,0,34,Yes,64,None,None,No,,0,0,0,"T,V,AI",II,2,END
+10132,1,1,534,Yes,1932,female,2,166,80,29,34,61,51,139,Breast cancer,1,0,0,"Epirubicin, docetaxel",0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,PVB19 (406),406,1,0,0,59,Yes,14,(MYHA-6 (variant of unknown significance)),Hypertension  ,No,,D,0,0,"T,VAI",II,2,END
+10188,1,1,271,Yes,1963,female,2,167,82,29,25,60,50,64,Breast cancer,1,0,0,Cyclophosphamide,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,No,0,0,0,0,37,No,8,TTN,None,No,,D,0,AR,T,II,2,END
+10198,1,2,334,Yes,1958,female,2,174,92,30,31,55,43,76,Breast cancer,1,0,0,Anthracycline + hormonal therapy ,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,PVB19 (<200),200,1,0,0,14,No,3,Unknown,None,No,,0,0,0,T,I,1,END
+10201,1,1,686,Yes,1959,female,2,170,74,26,23,66,59,106,Breast cancer,1,0,0,"Doxorubicin, cyclophosphamide, everolimus, exemestane, taxotene",0,1,0,0,1,0,0,0,0,0,0,0,0,0,1,0,PVB19 (2606),2606,1,0,0,3,Yes,20,None,None,No,,D,0,0,"T,V,AI",II,2,END
+10204,1,1,442,Yes,1948,female,2,153,64,27,15,60,56,121,Breast cancer,1,0,0,"cyclophosphamide, letrozol",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,PVB19 (<200),200,1,0,0,5,No,12,None,None,No,,D,0,0,T,III,3,END
+10206,1,1,397,Yes,1963,male,1,173,68,23,65,51,33,74,Chronic lymphatic leukemia,0,1,0,"Doxorubicin, cyclophosphamide, vincristin, prednison",0,1,0,0,1,0,0,0,0,0,0,1,0,1,0,0,HHV6 (<200),200,0,1,0,4,No,11,Unknown,Kidneyfunction disorder,No,,0,0,0,T,II,2,END
+10217,1,1,407,Yes,1946,female,2,169,79,28,35,43,36,82,Adenocarcinoma uterus,0,0,0,"Doxorubicin, cyclophosphamide, 5-fluorouracil (=5-FU)",0,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,"EBV (<200), HHV6 (<200), PVB19 (<200)",600,1,1,1,4,No,9,Incomplete (negative),"Hypertension, Transient ischemic attack",No,,0,0,0,T,II,2,END
+10059,3,1,614,Yes,1973,female,2,168,64,23,19,58,53,156,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (<200),200,1,0,0,6,No,10,Unknown,"Hypertension, Acute Kidney disease",No,,D,K,0,0,IV,4,END
+10021,3,1,10027,Yes,1944,female,2,169,82,29,32,59,44,112,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (2756),2756,1,0,0,11,No,6,Unknown,Chronic kidney disease,Yes,,D,K,0,V,III,3,END
+10033,3,1,10096,Yes,1948,male,1,174,106,35,20,74,68,69,Prostate cancer,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (<200),200,1,0,0,11,No,8,(RBM20 and TMEM43 (variants of unknown significance)),None (prostate cancer),No,,D,0,0,0,II,2,END
+523,3,1,442,Yes,1960,female,2,153,60,26,20,54,49,118,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,HHV6 (354),354,0,1,0,6,Yes,18,None,None,No,,D,0,0,"V,AI",III,3,END
+562,3,1,10130,Yes,1964,female ,2,177,92,29,20,54,40,98,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"EBV (<200), HHV6 (<200)",400,0,1,1,7,Yes,17,(DSP-gen (variant of unknown significance)),Fibromyalgia,No,,D,0,0,AI,II,2,END
+534,3,1,10132,Yes,1955,female,2,169,77,27,39,50,39,81,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (<200),200,1,0,0,3,No,13,Incomplete (negative),Diverticulitis,No,,0,0,0,0,I,1,END
+271,3,1,10188,Yes,1944,female,2,169,73,26,22,80,73,183,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,No,0,0,0,0,5,Yes,33,None,Chronic kidney disease,Yes,,D,K,0,AI,II,2,END
+686,3,1,10201,Yes,1948,female,2,170,72,25,20,69,61,107,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (402),402,1,0,0,14,No,6,Incomplete (negative),"Fibromyalgia, Morbus Crohn",No,,D,G,0,V,III,3,END
+442,3,1,10204,Yes,1941,female,2,152,69,30,26,60,54,99999,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (<200),200,1,0,0,6,No,13,Unknown,Asthma,No,,D,0,0,0,II,2,END
+397,3,1,10206,Yes,1988,male,1,179,73,23,47,53,40,75,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,PVB19 (330),330,1,0,0,18,No,6,None,None,No,,0,0,0,V,II,2,END
+407,3,1,10217,Yes,1964,female,2,163,73,28,39,48,39,125,None,0,0,0,None,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,No,0,0,0,0,0,No,12,None,None,No,,0,0,0,0,II,2,END
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,"""-""",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -1,0 +1,15 @@
+Database_ID	ncRNA_Symbol	ncRNA_Category	Species	Disease_Name	Detection_Method	Strong_Evidence	Weak_Evidence	Prediction_Method	Score	Causality	ncRNA_ID
+LDA0003653	H19	lncRNA	Homo sapiens	cardiac fibroblast proliferation and fibrosis	Experimental	IHC//MTT assay//qRT-PCR//Western blot	N/A	N/A	0.9820	Yes	RID12325
+LDA0005273	NONRATT021972	lncRNA	Homo sapiens	Myocardial Reperfusion Injury	Experimental	IHC//ISH//RT-PCR//Western blot	N/A	N/A	0.9820	Yes	RID16142
+LDA0007364	HIF1A-AS1	lncRNA	Homo sapiens	cardiovascular system disease	Experimental/Predicted	qPCR//Western blot	PCR array	LRLSLDA-LNCSIM1//LRLSLDA-LNCSIM2	0.9580	Yes	RID12376
+LDA0003659	FTX	lncRNA	Homo sapiens	cardiomyocyte apoptosis	Experimental	Immunoblot//Pull-down assay//qRT-PCR	N/A	N/A	0.9526	Yes	RID12163
+LDA0003993	H19	lncRNA	Homo sapiens	Diabetic Cardiomyopathies	Experimental	Luciferase reporter gene assay//qPCR//Western blot	N/A	N/A	0.9526	Yes	RID12325
+LDA0005270	APF	lncRNA	Homo sapiens	myocardial infarction	Experimental	Northern blot//qRT-PCR//Western blot	N/A	N/A	0.9526	Yes	RID08527
+LDA0005271	CARL	lncRNA	Homo sapiens	myocardial infarction	Experimental	Immunoblot//Northern blot//qRT-PCR	N/A	N/A	0.9526	Yes	RID08854
+LDA0007363	CDKN2B-AS1	lncRNA	Homo sapiens	cardiovascular system disease	Experimental/Predicted	qPCR	Array	RWRlncD	0.9007	Yes	RID08936
+LDA0004270	MEG3	lncRNA	Homo sapiens	gastric cardia adenocarcinoma	Experimental	qPCR//qRT-PCR	N/A	N/A	0.8808	Yes	RID15749
+LDA0005274	NRF	lncRNA	Homo sapiens	Myocardial Reperfusion Injury	Experimental	Knockdown//qPCR	N/A	N/A	0.8808	Yes	RID16266
+LDA0007360	PVT1	lncRNA	Homo sapiens	Cardiomegaly	Experimental/Predicted	qRT-PCR	N/A	LRLSLDA-LNCSIM1//LRLSLDA-LNCSIM2	0.7903	Yes	RID16665
+LDA0003660	H19	lncRNA	Homo sapiens	cardiomyocyte hypertrophy	Experimental	qPCR	N/A	N/A	0.7311	Yes	RID12325
+LDA0004262	C5orf66-AS1	lncRNA	Homo sapiens	gastric cardia adenocarcinoma	Experimental	qRT-PCR	N/A	N/A	0.7311	Yes	RID08798
+LDA0006657	MHRT	lncRNA	Homo sapiens	acute myocardial infarction	Experimental	qRT-PCR	N/A	N/A	0.7311	Yes	RID15771

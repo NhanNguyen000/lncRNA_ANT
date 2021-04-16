@@ -1,0 +1,144 @@
+7168    ,TPM1 : tropomyosin 1
+7169    ,TPM2 : tropomyosin 2
+7170    ,TPM3 : tropomyosin 3
+7171    ,TPM4 : tropomyosin 4
+1432    ,MAPK14 : mitogen-activated protein kinase 14
+4624    ,MYH6 : myosin heavy chain 6
+4625    ,MYH7 : myosin heavy chain 7
+4633    ,MYL2 : myosin light chain 2
+4634    ,MYL3 : myosin light chain 3
+4635    ,MYL4 : myosin light chain 4
+55844    ,PPP2R2D : protein phosphatase 2 regulatory subunit Bdelta
+9254    ,CACNA2D2 : calcium voltage-gated channel auxiliary subunit alpha2delta 2
+28227    ,"PPP2R3B : protein phosphatase 2 regulatory subunit B,,beta"
+70    ,"ACTC1 : actin, alpha, cardiac muscle 1"
+596    ,"BCL2 : BCL2, apoptosis regulator"
+186    ,AGTR2 : angiotensin II receptor type 2
+51806    ,CALML5 : calmodulin like 5
+10000    ,AKT3 : AKT serine/threonine kinase 3
+107    ,ADCY1 : adenylate cyclase 1
+108    ,ADCY2 : adenylate cyclase 2
+109    ,ADCY3 : adenylate cyclase 3
+111    ,ADCY5 : adenylate cyclase 5
+112    ,ADCY6 : adenylate cyclase 6
+113    ,ADCY7 : adenylate cyclase 7
+114    ,ADCY8 : adenylate cyclase 8
+115    ,ADCY9 : adenylate cyclase 9
+6262    ,RYR2 : ryanodine receptor 2
+10368    ,CACNG3 : calcium voltage-gated channel auxiliary subunit gamma 3
+10369    ,CACNG2 : calcium voltage-gated channel auxiliary subunit gamma 2
+146    ,ADRA1D : adrenoceptor alpha 1D
+147    ,ADRA1B : adrenoceptor alpha 1B
+148    ,ADRA1A : adrenoceptor alpha 1A
+153    ,ADRB1 : adrenoceptor beta 1
+154    ,ADRB2 : adrenoceptor beta 2
+6300    ,MAPK12 : mitogen-activated protein kinase 12
+3753    ,KCNE1 : potassium voltage-gated channel subfamily E regulatory subunit 1
+10411    ,RAPGEF3 : Rap guanine nucleotide exchange factor 3
+5294    ,"PIK3CG : phosphatidylinositol-4,5-bisphosphate 3-kinase catalytic subunit gamma"
+6324    ,SCN1B : sodium voltage-gated channel beta subunit 1
+59285    ,CACNG6 : calcium voltage-gated channel auxiliary subunit gamma 6
+185    ,AGTR1 : angiotensin II receptor type 1
+6330    ,SCN4B : sodium voltage-gated channel beta subunit 4
+6331    ,SCN5A : sodium voltage-gated channel alpha subunit 5
+6332    ,SCN7A : sodium voltage-gated channel alpha subunit 7
+23236    ,PLCB1 : phospholipase C beta 1
+3784    ,KCNQ1 : potassium voltage-gated channel subfamily Q member 1
+207    ,AKT1 : AKT serine/threonine kinase 1
+208    ,AKT2 : AKT serine/threonine kinase 2
+5330    ,PLCB2 : phospholipase C beta 2
+5331    ,PLCB3 : phospholipase C beta 3
+91860    ,CALML4 : calmodulin like 4
+2773    ,GNAI3 : G protein subunit alpha i3
+2776    ,GNAQ : G protein subunit alpha q
+9252    ,RPS6KA5 : ribosomal protein S6 kinase A5
+2778    ,GNAS : GNAS complex locus
+84699    ,CREB3L3 : cAMP responsive element binding protein 3 like 3
+55012    ,"PPP2R3C : protein phosphatase 2 regulatory subunit B,,gamma"
+5350    ,PLN : phospholamban
+468    ,ATF4 : activating transcription factor 4
+2770    ,GNAI1 : G protein subunit alpha i1
+2771    ,GNAI2 : G protein subunit alpha i2
+10488    ,CREB3 : cAMP responsive element binding protein 3
+5332    ,PLCB4 : phospholipase C beta 4
+64764    ,CREB3L2 : cAMP responsive element binding protein 3 like 2
+775    ,CACNA1C : calcium voltage-gated channel subunit alpha1 C
+776    ,CACNA1D : calcium voltage-gated channel subunit alpha1 D
+778    ,CACNA1F : calcium voltage-gated channel subunit alpha1 F
+779    ,CACNA1S : calcium voltage-gated channel subunit alpha1 S
+781    ,CACNA2D1 : calcium voltage-gated channel auxiliary subunit alpha2delta 1
+782    ,CACNB1 : calcium voltage-gated channel auxiliary subunit beta 1
+783    ,CACNB2 : calcium voltage-gated channel auxiliary subunit beta 2
+784    ,CACNB3 : calcium voltage-gated channel auxiliary subunit beta 3
+785    ,CACNB4 : calcium voltage-gated channel auxiliary subunit beta 4
+786    ,CACNG1 : calcium voltage-gated channel auxiliary subunit gamma 1
+196883    ,ADCY4 : adenylate cyclase 4
+801    ,CALM1 : calmodulin 1
+805    ,CALM2 : calmodulin 2
+23533    ,PIK3R5 : phosphoinositide-3-kinase regulatory subunit 5
+808    ,CALM3 : calmodulin 3
+810    ,CALML3 : calmodulin like 3
+815    ,CAMK2A : calcium/calmodulin dependent protein kinase II alpha
+816    ,CAMK2B : calcium/calmodulin dependent protein kinase II beta
+817    ,CAMK2D : calcium/calmodulin dependent protein kinase II delta
+818    ,CAMK2G : calcium/calmodulin dependent protein kinase II gamma
+7134    ,"TNNC1 : troponin C1, slow skeletal and cardiac type"
+11069    ,RAPGEF4 : Rap guanine nucleotide exchange factor 4
+5600    ,MAPK11 : mitogen-activated protein kinase 11
+7137    ,"TNNI3 : troponin I3, cardiac type"
+5603    ,MAPK13 : mitogen-activated protein kinase 13
+7139    ,"TNNT2 : troponin T2, cardiac type"
+5519    ,PPP2R1B : protein phosphatase 2 scaffold subunit Abeta
+148327    ,CREB3L4 : cAMP responsive element binding protein 3 like 4
+163688    ,CALML6 : calmodulin like 6
+1385    ,CREB1 : cAMP responsive element binding protein 1
+1386    ,ATF2 : activating transcription factor 2
+1388    ,ATF6B : activating transcription factor 6 beta
+6546    ,SLC8A1 : solute carrier family 8 member A1
+1390    ,CREM : cAMP responsive element modulator
+90993    ,CREB3L1 : cAMP responsive element binding protein 3 like 1
+9586    ,CREB5 : cAMP responsive element binding protein 5
+59283    ,CACNG8 : calcium voltage-gated channel auxiliary subunit gamma 8
+59284    ,CACNG7 : calcium voltage-gated channel auxiliary subunit gamma 7
+5499    ,PPP1CA : protein phosphatase 1 catalytic subunit alpha
+5500    ,PPP1CB : protein phosphatase 1 catalytic subunit beta
+5501    ,PPP1CC : protein phosphatase 1 catalytic subunit gamma
+5502    ,PPP1R1A : protein phosphatase 1 regulatory inhibitor subunit 1A
+5525    ,"PPP2R5A : protein phosphatase 2 regulatory subunit B,alpha"
+5515    ,PPP2CA : protein phosphatase 2 catalytic subunit alpha
+5516    ,PPP2CB : protein phosphatase 2 catalytic subunit beta
+5518    ,PPP2R1A : protein phosphatase 2 scaffold subunit Aalpha
+23439    ,ATP1B4 : ATPase Na+/K+ transporting family member beta 4
+5520    ,PPP2R2A : protein phosphatase 2 regulatory subunit Balpha
+5521    ,PPP2R2B : protein phosphatase 2 regulatory subunit Bbeta
+5522    ,PPP2R2C : protein phosphatase 2 regulatory subunit Bgamma
+5523    ,"PPP2R3A : protein phosphatase 2 regulatory subunit B,,alpha"
+6548    ,SLC9A1 : solute carrier family 9 member A1
+93589    ,CACNA2D4 : calcium voltage-gated channel auxiliary subunit alpha2delta 4
+5526    ,"PPP2R5B : protein phosphatase 2 regulatory subunit B,beta"
+5527    ,"PPP2R5C : protein phosphatase 2 regulatory subunit B,gamma"
+5528    ,"PPP2R5D : protein phosphatase 2 regulatory subunit B,delta"
+5529    ,"PPP2R5E : protein phosphatase 2 regulatory subunit B,epsilon"
+146850    ,PIK3R6 : phosphoinositide-3-kinase regulatory subunit 6
+5566    ,PRKACA : protein kinase cAMP-activated catalytic subunit alpha
+5567    ,PRKACB : protein kinase cAMP-activated catalytic subunit beta
+5568    ,PRKACG : protein kinase cAMP-activated catalytic subunit gamma
+5578    ,PRKCA : protein kinase C alpha
+27091    ,CACNG5 : calcium voltage-gated channel auxiliary subunit gamma 5
+27092    ,CACNG4 : calcium voltage-gated channel auxiliary subunit gamma 4
+5594    ,MAPK1 : mitogen-activated protein kinase 1
+5595    ,MAPK3 : mitogen-activated protein kinase 3
+476    ,ATP1A1 : ATPase Na+/K+ transporting subunit alpha 1
+477    ,ATP1A2 : ATPase Na+/K+ transporting subunit alpha 2
+478    ,ATP1A3 : ATPase Na+/K+ transporting subunit alpha 3
+480    ,ATP1A4 : ATPase Na+/K+ transporting subunit alpha 4
+481    ,ATP1B1 : ATPase Na+/K+ transporting subunit beta 1
+482    ,ATP1B2 : ATPase Na+/K+ transporting subunit beta 2
+483    ,ATP1B3 : ATPase Na+/K+ transporting subunit beta 3
+486    ,FXYD2 : FXYD domain containing ion transport regulator 2
+488    ,ATP2A2 : ATPase sarcoplasmic/endoplasmic reticulum Ca2+ transporting 2
+490    ,ATP2B1 : ATPase plasma membrane Ca2+ transporting 1
+491    ,ATP2B2 : ATPase plasma membrane Ca2+ transporting 2
+492    ,ATP2B3 : ATPase plasma membrane Ca2+ transporting 3
+493    ,ATP2B4 : ATPase plasma membrane Ca2+ transporting 4
+55799    ,CACNA2D3 : calcium voltage-gated channel auxiliary subunit alpha2delta 3

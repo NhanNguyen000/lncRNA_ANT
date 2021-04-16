@@ -1,0 +1,76 @@
+SID	Type	RNA-seq Batch	Year of birth SID	Matched to SID	Sex	Lenght, cm	Weight, kg	BMI, kg/mm2	LVEF (ultrasound), %	Cancer type	Treat with	Chemotherapeutic agents	Virus in biopsy (copies per microgram DNA)	Collagen volume fraction biopsy, %	Inflammation biopsy	Inflammatory cells biopsy (CD45 + CD68), n per mm2 	Genetic mutation	Comorbidities	Death
+614	Late onset cardiotoxicity	1	1946	10059	female	165	62	23	33	Breast cancer	ANT	Doxorubicin, cyclophosphamide, 5-fluorouracil (=5-FU)	PVB19 (<200)	18	No	7	SCN5A (pathogenic)	None	No
+10027	Late onset cardiotoxicity	1	1949	10021	female	170	86	30	20	Breast cancer	ANT	Doxorubicin, epirubicin, tamoxifen	PVB19 (492)	17	Yes	26	(TTN (variant of unknown significance))	None	Yes
+10096	Late onset cardiotoxicity	1	1945	10033	male	176	101	33	22	Non-Hodgkin lymphoma	ANT	Doxorubicin, cyclophosphamide, rituximab, vincristin, prednison	PVB19 (<200)	unknown	No	unknown	Unknown	Diabetes (type II), hypertension, history of alcoholabuse	No
+281	Late onset cardiotoxicity	NA	1964	213	male	183	68	20	30	larynxcarcinoma		5-FU, cetuximab, carboplatin	No	None	No	11	MYHA-7 (pathogenic)	lung emphysema	Yes
+423	Late onset cardiotoxicity	3	1970	523	female	157	62	25	26	Breast cancer	ANT	Doxorubicin, epirubicin	No	6	No	13	Unknown	Asthma	No
+501	Late onset cardiotoxicity	NA	1956	724	male	173	66	22	48	Stomach cancer		Cisplatin, pemetrexed	PVB19 (448)	3	Yes	23	Unknown	Chronic obstructive pulmonary disease	Yes
+731	Late onset cardiotoxicity	NA	1954	211	female	165	60	22	28	Breast cancer	ANT	Doxorubicin, cyclophosphamide, 5-fluorouracil (=5-FU)	PVB19 (<200), EBV (<200)	24	No	6	None	chronic obstructive pulmonary disease	No
+842	Late onset cardiotoxicity	NA	1951	144	male	178	82	26	15	Neuro-endocrien tumor 		Sandostatin	No	6	No	11	Unknown	Hypertension, Rheumatoid Artritis	Yes
+10130	Late onset cardiotoxicity	2	1958	562	female	182	95	29	44	Breast cancer	ANT	Doxorubicin, cyclophosphamide, rituximab, vincristin, prednison	PVB19 (1829)	34	Yes	64	None	None	No
+10132	Late onset cardiotoxicity	2	1932	534	female	166	80	29	34	Breast cancer	ANT	Epirubicin, docetaxel	PVB19 (406)	59	Yes	14	(MYHA-6 (variant of unknown significance))	Hypertension  	No
+10188	Late onset cardiotoxicity	2	1963	271	female	167	82	29	25	Breast cancer		Cyclophosphamide	No	37	No	8	Incomplete (negative)	None	No
+10198 (!)	Late onset cardiotoxicity	2	1958	334	female	174	92	30	31	Breast cancer	ANT	Anthracycline + hormonal therapy 	PVB19 (<200)	14	No	3	Unknown	None	No
+10201	Late onset cardiotoxicity	2	1959	686	female	170	74	26	23	Breast cancer	ANT	Doxorubicin, cyclophosphamide, everolimus, exemestane, taxotene	PVB19 (2606)	3	Yes	20	None	None	No
+10204	Late onset cardiotoxicity	2	1948	442	female	153	64	27	15	Breast cancer		cyclophosphamide, letrozol	PVB19 (<200)	5	No	12	None	None	No
+10206	Late onset cardiotoxicity	2	1963	397	male	173	68	23	65	Chronic lymphatic leukemia	ANT	Doxorubicin, cyclophosphamide, vincristin, prednison	HHV6 (<200)	4	No	11	Unknown	Kidneyfunction disorder	No
+10217	Late onset cardiotoxicity	2	1946	407	female	169	79	28	35	Adenocarcinoma uterus	ANT	Doxorubicin, cyclophosphamide, 5-fluorouracil (=5-FU)	EBV (<200), HHV6 (<200), PVB19 (<200)	4	No	9	Incomplete (negative)	Hypertension, Transient ischemic attack	No
+10220	Late onset cardiotoxicity	3	1952	245	female	168	69	24	31	Breast cancer		Tamoxifen	PVB19 (946)	11	No	3	Unknown	None	No
+10239	Late onset cardiotoxicity	3	1954	237	female	150	56	25	16	Breast cancer	ANT	doxorubicin, cyclophosphamide, docetaxel, tamoxifen	HHV6 (<200), PVB19 (290)	4	No	10	MYHA-7 (likely pathogenic)	Chronic obstructive pulmonary disease	No
+10244	Late onset cardiotoxicity	3	1954	729	male	176	77	25	44	Hodgkin lympohma		extreme radiotherapy (mantelveld)	PVB19 (1167)	4	No 	7	None	None	No
+10247	Late onset cardiotoxicity	3	1953	346	female	158	65	26	40	Breast cancer	ANT	Doxorubicin, cyclophosphamide, docetaxel, tamoxifen	PVB19 (1578)	4	No	4	Unknown	Hypothyreoidy	No
+10252	Late onset cardiotoxicity	3	1970	150	male	179	88	27	20	Hodgkin lympohma	ANT	Doxorubicin, bleomycine, vinblastin, dacarbazin	PVB19 (<200)	11	Yes	14	Unknown	Asthma	No
+10284	Late onset cardiotoxicity	3	1952	396	female	175	91	30	19	Breast cancer	ANT	Doxorubicin, cyclophosphamide, 5-FU, tamoxifen	No	1	No	4	Unknown	Atrial fibrillation	No
+10285	Late onset cardiotoxicity	3	1955	679	female	180	77	24	44	Breast cancer	ANT	doxorubicin, cyclophosphamide, docetaxel	PVB19 (200)	3	No	3	None	None	No
+10312	Late onset cardiotoxicity	NA	1966	617	female	167	76	27	36	Breast cancer	ANT	Doxorubicin, cyclophosphamide, pertuzumab + trastuwumab	PVB19 (200)	3	No	5	EMD (variant of unknown significance)	None	No
+10315	Late onset cardiotoxicity	3	1971	488	female	162	71	27	45	Lymphgenic spread melanoma		Nivolumab (monoclonal antibody)	PVB19 (200)	4	Yes	19	Unknown	None	Yes
+10234	Acute onset cardiotoxicity	NA	1947		female	158	64	26	12	Acute myeloid leukemia	ANT	Daunorubicin, cytarabine, tosedostat	HHV6 (<200), PVB19 (231)	11	No	4	None	Hypertension	No
+10059	Control patients	1	1973	614	female	168	64	23	19	"""-"""		"""-"""	PVB19 (<200)	6	No	10	Unknown	Hypertension, Acute Kidney disease	No
+10021	Control patients	1	1944	10027	female	169	82	29	32	"""-"""		"""-"""	PVB19 (2756)	11	No	6	Unknown	Chronic kidney disease	Yes
+10033	Control patients	1	1948	10096	male	174	106	35	20	Prostate cancer		"""-"" (local therapy only)"	PVB19 (<200)	11	No	8	(RBM20 and TMEM43 (variants of unknown significance))	None (prostate cancer)	No
+213	Control patients	NA	1969	281	male	190	75	21	21	"""-"""		"""-"""							
+523	Control patients	2	1960	423	female	153	60	26	20	"""-"""		"""-"""	HHV6 (354)	6	Yes	18	None	None	No
+724	Control patients	NA	1960	501	male	175	63	21	43	"""-"""		"""-"""							
+211	Control patients	NA	1986	731	female	167	60	22	25	"""-"""		"""-"""							
+144	Control patients	NA	1946	842	male	173	81	27	18	"""-"""		"""-"""							
+562	Control patients	2	1964	10130	female 	177	92	29	20	"""-"""		"""-"""	EBV (<200), HHV6 (<200)	7	Yes	17	(DSP-gen (variant of unknown significance))	Fibromyalgia	No
+534	Control patients	2	1955	10132	female	169	77	27	39	"""-"""		"""-"""	PVB19 (<200)	3	No	13	Incomplete (negative)	Diverticulitis	No
+271	Control patients	NA	1944	10188	female	169	73	26	22	"""-"""		"""-"""	No	5	Yes	33	None	Chronic kidney disease	Yes
+334	Control patients	NA	1967	10198	female	165	93	34	36	"""-"""		"""-"""	No	1	Yes	23	None	Hypertension	No
+686	Control patients	2	1948	10201	female	170	72	25	20	"""-"""		"""-"""	PVB19 (402)	14	No	6	Incomplete (negative)	Fibromyalgia, Morbus Crohn	No
+442	Control patients	NA	1941	10204	female	152	69	30	26	Breast cancer		"""-"" (surgery only)"	PVB19 (<200)	6	No	13	Unknown	Asthma	No
+397	Control patients	2	1988	10206	male	179	73	23	47	"""-"""		"""-"""	PVB19 (330)	18	No	6	None	None	No
+407	Control patients	NA	1964	10217	female	163	73	28	39	"""-"""		"""-"""	No	0	No	12	None	None	No
+245	Control patients	NA	1946	10220	female	164	66	23	20	"""-"""		"""-"""	PVB19 (620)	8	No	9	TTN (likely pathogenic)	None	No
+237	Control patients	3	1938	10239	female	153	55	24	18	"""-"""		"""-"""	PVB19 (1225)	5	No	14	None	None	No
+729	Control patients	NA	1946	10244	male	174	78	26	31	"""-"""		"""-"""	No	2	Yes	27	None	None	No
+346	Control patients	NA	1957	10247	female	159	71	28	43	"""-"""		"""-"""	No	9	Yes	20	Unknown	"M. Bechterew, Hypertension"	No
+150	Control patients	NA	1975	10252	male	179	86	27	12	"""-"""		"""-"""	No	4	No 	0	(MyBPC3 and LaminAC (variants of unknown significance)	None	No
+396	Control patients	NA	1955	10284	female	179	141	44	29	"""-"""		"""-"""	PVB19 (479)	17	No	8	Unknown	Hypertension, COPD, atrial fibrillation	Yes
+679	Control patients	NA	1981	10285	female	195	90	24	50	"""-"""		"""-"""	No	6	No	11	None	None	No
+617	Control patients	3	1958	10312	female	165	103	38	35	"""-"""		"""-"""	PVB19 (660), HHV6 (200)	5	No	6	None	None	No
+488	Control patients	3	1951	10315	female	166	99	36	44	"""-"""		"""-"""	PVB19 (200)	10	Yes	18	None	Reumatoid artritis, hypothyroidy, tuberculosis during childhood	No
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			

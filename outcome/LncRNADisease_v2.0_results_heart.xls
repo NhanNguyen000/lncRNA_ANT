@@ -1,0 +1,6 @@
+Database_ID	ncRNA_Symbol	ncRNA_Category	Species	Disease_Name	Detection_Method	Strong_Evidence	Weak_Evidence	Prediction_Method	Score	Causality	ncRNA_ID
+LDA0003959	AC091891.2	lncRNA	Homo sapiens	congestive heart failure	Experimental	qRT-PCR//Western blot	N/A	N/A	0.8808	Yes	RID03652
+LDA0004414	H19	lncRNA	Homo sapiens	heart disease	Experimental	qRT-PCR//Western blot	N/A	N/A	0.8808	Yes	RID12325
+LDA0004416	BACE1-AS	lncRNA	Homo sapiens	Heart Failure	Experimental	IHC//RNA ISH	N/A	N/A	0.8808	Yes	RID08625
+LDA0004415	HOTAIR	lncRNA	Homo sapiens	heart disease	Experimental	qPCR	Microarray	N/A	0.8785	Yes	RID12698
+LDA0004413	AC245452.1	lncRNA	Homo sapiens	heart disease	Experimental	RT-PCR	N/A	N/A	0.7311	Yes	RID05519

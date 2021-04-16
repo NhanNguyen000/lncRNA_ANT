@@ -1,0 +1,82 @@
+
+# functions
+get.RNA_data_combine <- function(list_dataset, data_type) {
+  
+  RNA_data_combine  <- merge(list_dataset[[1]][[data_type]], list_dataset[[2]][[data_type]], by = "row.names")
+  RNA_data_combine  <- get.rownames(RNA_data_combine)
+  
+  if (length(list_dataset) > 2) {
+    for (i in c(3:length(list_dataset))) {
+      RNA_data_combine  <- merge(RNA_data_combine, list_dataset[[i]][[data_type]], by = "row.names")
+      RNA_data_combine  <- get.rownames(RNA_data_combine)
+    }
+  }
+  
+  return(RNA_data_combine)
+}
+
+
+get.rownames <- function(data) {
+  rownames(data) <- data[, 1]
+  data  <- data[, -1]
+  return(data)
+}
+
+get.metadata_for_ImpulseDe2 <- function(Input_data) {
+  metadata <- as.data.frame(matrix(NA, ncol = 3, nrow = length(colnames(Input_data))))
+  colnames(metadata) <- c("Sample", "Condition", "Time")
+  rownames(metadata) <- colnames(Input_data)
+  
+  metadata[, "Sample"]   <- rownames(metadata)
+  metadata[, "Condition"]<- rep(c("case","control"), each = (length(colnames(Input_data))/2))
+  metadata[, "Time"]     <- as.integer(substr(rownames(metadata), 9, 11))
+  return(metadata)
+}
+
+get.ImpulseDE2_outcome <- function(Input_data, metadata) {
+  library(ImpulseDE2)
+  raw_data <- matrix(as.integer(as.matrix(Input_data)), ncol = ncol(Input_data))
+  colnames(raw_data) <- colnames(Input_data)
+  rownames(raw_data) <- rownames(Input_data)
+  objectImpulseDE2 <- runImpulseDE2(matCountData = raw_data, 
+                                    dfAnnotation = metadata,
+                                    boolCaseCtrl = TRUE,
+                                    vecConfounders = NULL,
+                                    scaNProc = 1)
+  return(objectImpulseDE2)
+}
+
+# code
+load("/ngs-data/analysis/hecatos/NhanNguyen/RNAseq/Cardiac/Con_Flu_DMSO_Gal/TotalRNA/Genes/Con_DF2data_Cardiac_NN_20191112.RData")
+load("/ngs-data/analysis/hecatos/NhanNguyen/RNAseq/Cardiac/Doxorubicin/TotalRNA/Genes/DOXdata_Cardiac_NN_20191112.RData")
+load("/ngs-data/analysis/hecatos/NhanNguyen/RNAseq/Cardiac/Epirubicin/TotalRNA/Genes/EPIdata_Cardiac_NN_20191112.RData")
+load("/ngs-data/analysis/hecatos/NhanNguyen/RNAseq/Cardiac/Idarubicin/TotalRNA/Genes/IDAdata_Cardiac_NN_20191112.RData")
+
+
+RNA_data_count  <- get.RNA_data_combine(list(Con_DF2, DOX, EPI, IDA), "expected_count")
+RNA_data_count  <- RNA_data_count[, -grep("Con_DF2_000_", colnames(RNA_data_count))]
+
+drug_The_list <- c("DOX_The", "EPI_The", "IDA_The")
+drug_outcome <- list()
+for(drug in drug_The_list ) {
+  Control_data <- RNA_data_count[,grepl("Con_DF2", colnames(RNA_data_count))]
+  Drug_data    <- RNA_data_count[,grepl(drug, colnames(RNA_data_count))]
+  Input_data <- cbind(Drug_data,Control_data)
+  
+  metadata <-get.metadata_for_ImpulseDe2(Input_data)
+  drug_outcome[[drug]] <- get.ImpulseDE2_outcome(Input_data, metadata)
+}
+
+drug_Tox_list <- c("DOX_Tox", "EPI_Tox", "IDA_Tox")
+for(drug in drug_Tox_list) {
+  Control_data <- RNA_data_count[,grepl("Con_DF2", colnames(RNA_data_count))]
+  Drug_data    <- RNA_data_count[,grepl(drug, colnames(RNA_data_count))]
+  Input_data <- cbind(Drug_data,Control_data)
+  Input_data <- Input_data[, -grep("Con_DF2_336_", colnames(Input_data))]
+  
+  metadata <-get.metadata_for_ImpulseDe2(Input_data)
+  drug_outcome[[drug]] <- get.ImpulseDE2_outcome(Input_data, metadata)
+}
+
+
+save(drug_outcome, file = "drug_outcome_NN_2020Mar13.RData")

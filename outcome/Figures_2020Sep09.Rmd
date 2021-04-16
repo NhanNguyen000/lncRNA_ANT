@@ -1,0 +1,93 @@
+---
+title: "Figures"
+author: "Nhan Nguyen"
+date: "2020 M09 9"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Figures
+
+```{r pressure, echo = FALSE}
+get.path <- function(list_categories) {
+  require("here")
+  library(here)
+  path <- here::here(list_categories)
+  return(path)
+}
+source(get.path("R_functions_forAnthracyclines_ImpulseDE2.R"))
+#ls()
+## Input RNA data & get Ensemble data
+setwd(get.path("data"))
+load("Con_DF2data_Cardiac_NN_20191112.RData")
+#load("Con_UNTRdata_Cardiac_NN_2020Feb26.RData")
+load("DOXdata_Cardiac_NN_20191112.RData")
+load("EPIdata_Cardiac_NN_20191112.RData") 
+load("IDAdata_Cardiac_NN_20191112.RData")
+load("Biopsies_ANT_Cardiac_NN_2020Feb19.RData")
+
+Ensemble_database    <- Loaded_data(folder = get.path("data"), file_name = "Ensemble_mart_export_NN_20190815.txt")
+
+# Figure 1 --------------------------------------------------------
+# Preparation: get normalized data (read count) + expression in gene categorical in plot (Figure 1.A) ---------------------------
+## Get normalized data (without Con_UNTR)
+RNA_data_count  <- get.RNA_data_combine(list(Con_DF2, DOX, EPI, IDA), "expected_count")
+RNA_data_count  <- RNA_data_count[, -grep("Con_DF2_000_", colnames(RNA_data_count))]
+RNA_total_read_count <- get.total_reads_plot(RNA_data_count) 
+RNA_total_read_count[which(RNA_total_read_count<5e+6)] # read count of DOX_Tox_240_2, IDA_The_240_3 < 5 milions (5e+6) read count
+
+RNA_data_count  <- RNA_data_count[, -grep("DOX_Tox_240_2", colnames(RNA_data_count))]
+RNA_data_count  <- RNA_data_count[, -grep("IDA_The_240_3", colnames(RNA_data_count))]
+norm_data       <- get.norm_data(RNA_data_count) # by DEseq2
+norm_data_v1    <- get.remove_gene_low_express(norm_data, 0)
+## Count for gene expression in each gene type
+database_sum          <- get.summary_database(norm_data, norm_data_v1)
+#database_sum_log      <- get.log(database_sum, log_base = 2)
+
+par(mar=c(5,13,1,2))
+barplot(t(database_sum[,c(2:3)]), horiz=TRUE, width = 0.5, col = c("orange","grey"),
+        xlim=c(0,20000), las=1, cex.names = .7, 
+        xlab = "Number of genes")
+legend("topright", cex = 0.7, 
+       c("Expressed genes", "Non enxpressed genes"), 
+       fill = c("orange","grey"))
+
+```
+Figure 1: The proportion of gene expressed in each gene type in the RNA-seq data.
+
+## PCA samples:
+```{r, echo = FALSE}
+library("factoextra")
+data <- t(norm_data_v1)
+get.pca(data, condition = c(substring(rownames(data), 1,7)), name = "test")
+```
+Figure 2: PCA of the samples
+
+### expression:
+```{r, echo = FALSE}
+Selected_lncRNA <- c("ENSG00000269900", "ENSG00000233016", "ENSG00000130600",
+                     "ENSG00000245573", "ENSG00000175061", "ENSG00000267107")
+Selected_data     <- Select_if_in_specific_list(norm_data, Selected_lncRNA)
+print.Log2geneExpression(Selected_data)
+```
+Figure 3.A: Ovelaping DE lncRNAs in all ANT-treated samples
+
+```{r, echo = FALSE}
+Selected_lncRNA <- c("ENSG00000230590",  "ENSG00000229807", "ENSG00000267322",  "ENSG00000269821")
+Selected_data     <- Select_if_in_specific_list(norm_data, Selected_lncRNA)
+print.Log2geneExpression(Selected_data)
+```
+Figure 3.B: DE lncRNAs in DOX, EPI, iDA
+
+```{r, echo = FALSE}
+Selected_lncRNA <- c("ENSG00000245532", "ENSG00000251562", "ENSG00000214548", "ENSG00000265043")
+Selected_data     <- Select_if_in_specific_list(norm_data, Selected_lncRNA)
+print.Log2geneExpression(Selected_data)
+```
+Figure 3.C: DE lncRNAs in 2 of 3 ANT drugs
+
