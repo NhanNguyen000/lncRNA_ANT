@@ -163,27 +163,10 @@ plot(dend, horiz = TRUE)
 database_sum          <- get.summary_database(norm_data, norm_data_v1)
 #database_sum_log      <- get.log(database_sum, log_base = 2)
 
-
-par(mar=c(5,13,1,2))
-barplot(t(database_sum[,c(2:3)]), horiz=TRUE, width = 0.5, col = c("orange","grey"),
-        xlim=c(0,20000), las=1, cex.names = .7, 
-        xlab = "Number of genes")
-legend("topright", cex = 0.7, 
-       c("Expressed genes", "Non enxpressed genes"), 
-       fill = c("orange","grey"))
-
-
-
 gene_types <- database_sum[c("protein_coding", "processed_pseudogene", "lncRNA"),]
 other_genes <- colSums(database_sum) - colSums(gene_types)
 gene_types <- rbind(gene_types, "other_genes" = other_genes)
 get.pie_chart(gene_types$`number of gene expression`, row.names(gene_types))
-
-## PCA samples:
-library("factoextra")
-data <- t(norm_data_v1)
-get.pca(data, condition = c(substring(rownames(data), 1,7)), name = "test")
-
 
 # Load ImpulseDE2 outcome + DE gene categorical in plot -------------------------------------------------
 setwd(get.path("outcome"))
@@ -204,7 +187,20 @@ for(drug in names(drug_outcome)) {
 #write.table(Ensemble_database$Gene.stable.ID, "Genes_background.txt",
 #            row.names=F,col.names=F,sep="\t", quote=FALSE)
 
-## Group gene types (protein_coding & lncRNA & other RNAs)
+# FIgure 1D: Pie chart - overlapped differentially expressed genes --------------------------
+ANTs_venn <-get.vennDiam(drug_ImpulseDE2Result, names(drug_ImpulseDE2Result))
+get.summary_gene_type(ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`)
+
+Overlap_DE_database <- get.selected_data(ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`,
+                                         Ensemble_database, "Gene.stable.ID")
+Overlap_DE_summary <- get.summary_gene_type(Overlap_DE_database)
+
+Overlap_DE_gene_type <- Overlap_DE_summary[c("protein_coding", "processed_pseudogene", "lncRNA"),]
+other_genes <- sum(Overlap_DE_summary) - sum(Overlap_DE_gene_type)
+Overlap_DE_gene_type <- c(Overlap_DE_gene_type, "other_genes" = other_genes)
+get.pie_chart(Overlap_DE_gene_type, names(Overlap_DE_gene_type))
+
+# Figure 1E: Group gene types (protein_coding & lncRNA & other RNAs) -----------------------
 DE_database   <- list()
 DE_summary    <- list()
 DE_gene_types <- c()
@@ -217,12 +213,40 @@ for (condition in names(drug_ImpulseDE2Result)) {
   DE_gene_types_tem    <- c()
   DE_gene_types_tem[1] <- data$protein_coding
   DE_gene_types_tem[2] <- data$lncRNA
-  DE_gene_types_tem[3] <- sum(data) - (data$protein_coding + data$lncRNA)
+  DE_gene_types_tem[3] <- data$processed_pseudogene
+  DE_gene_types_tem[4] <- sum(data) - (data$protein_coding + data$lncRNA + data$processed_pseudogene)
   DE_gene_types        <- cbind(DE_gene_types, DE_gene_types_tem)
 }
 
-rownames(DE_gene_types) <- c("protein_coding", "lncRNA", "other_RNAs")
+rownames(DE_gene_types) <- c("protein_coding", "lncRNA", "processed_pseudogene", "other_RNAs")
 colnames(DE_gene_types) <- names(drug_ImpulseDE2Result)
+
+# Pathway anaylsis ------------------------------------
+# Figure 2 A: 
+setwd("D:/TGX/GitHub/lncRNA-EPI/outcome")
+ORA_outcome <- read.csv("ORA_results_ANTs.tab", sep = "\t")
+top_pathways <- ORA_outcome[c(1:10),]
+
+top_pathways$pathway <- gsub('.{23}$', '', top_pathways$pathway)
+for (i in 1:nrow(top_pathways)) {
+  top_pathways$genes[i] <- length(unlist(strsplit(top_pathways$members_input_overlap[i], ";")))
+}
+
+
+library(tidyverse)
+ggplot(data = top_pathways) + geom_point(mapping = aes(x=-log(p.value,10), y=pathway, size = genes)) +
+  xlab("-log10(p.value)") + xlim(0, 40)
+
+# Figure 2.B: gene types in the pathway anayslis outcome: --> different result
+gene_list<- unique(gsub(" ", "", unlist(strsplit(top_pathways$members_input_overlap, ";")),fixed = TRUE))
+gene_list_database <- get.selected_data(gene_list, Ensemble_database, "Gene.stable.ID")
+gene_list_summary <- get.summary_gene_type(gene_list_database)
+
+gene_types <- gene_list_summary["protein_coding"]
+other_genes <- sum(gene_list_summary) - gene_list_summary["protein_coding",]
+gene_types <- c(gene_list_summary["protein_coding",], "lncRNA" = 0,
+                          "other_genes" = other_genes)
+get.pie_chart(gene_types, names(gene_types))
 
 
 # in ANTs: DOX_The, EPI_The, IDA_The, DOX_Tox, EPI_Tox, IDA_Tox 

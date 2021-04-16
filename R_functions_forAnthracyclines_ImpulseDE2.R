@@ -119,11 +119,13 @@ get.log <- function(data, log_base) {
   return(output)
 }
 
-get.pie_chart <- function(data, title) {
-  Pie_chart_info_percent  <- round(100*data/sum(data), 1)
-  labls <- paste0(Pie_chart_info_percent, "% ", rownames(data))
+get.pie_chart <- function(data, names) {
+  library(viridis)
+  Pie_chart_info_percent  <- round(100*data/sum(data), 2)
+  labls <- paste0(names, " (", Pie_chart_info_percent, "%",")")
   labls[data < sort(data, decreasing = TRUE)[4]] <- ""
-  pie(Pie_chart_info_percent, labels = labls, main = title)
+  pie(Pie_chart_info_percent, labels = labls, 
+      init.angle = 45, col = viridis_pal()(length(data)))
 }
 
 
