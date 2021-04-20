@@ -37,13 +37,18 @@ norm_data       <- get.norm_data(RNA_data_count) # by DEseq2
 norm_data_v1    <- get.remove_gene_low_express(norm_data, 0)
 
 # figure 1A: clustering the invitro RNseq profiles
+library(tidyverse)
 library(dendextend)
 library(viridis)
-dend <- t(norm_data_v1) %>% dist %>% hclust("mcquitty") %>% as.dendrogram
+dend <- t(norm_data_v1) %>% scale %>% dist %>% hclust("ward.D") %>% as.dendrogram %>% 
+  set("branches_lwd", 2) %>% set("labels_cex", 0.8)
 groupCodes <- substr(colnames(norm_data_v1), 1, 7)
-colorCodes <- viridis_pal()(7)
+colorCodes <- viridis(8)[1:7]
+names(colorCodes) <- unique(groupCodes)
 labels_colors(dend) <- colorCodes[groupCodes][order.dendrogram(dend)]
+par(mar=c(5.1, 4, 4.1, 15))
 plot(dend, horiz = TRUE)
+
 
 # Figure 1 B: PCA of the human biopsies data:
 # Clean biopsies metadata -------------------------------------------------
@@ -160,28 +165,42 @@ res <- results(dds3, contrast = c("Biopsies_type", "LateCardiotoxicity_with_ANT"
 res.full <- as.data.frame(res)
 biopsies_ANTvsCon <-subset(res.full,res.full$padj <= 0.01) # 37 DE genes
 biopsies_ANTvsCon_lncRNA <- get.lncRNA(biopsies_ANTvsCon) # 5 DE lncRNAs
+unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% biopsies_ANTvsCon_lncRNA)])
 #write.table(rownames(biopsies_ANTvsCon), "DEgenes_biopsies.txt",
 #            row.names=F,col.names=F,sep="\t", quote=FALSE)
 
 Overlap_invitro_biopsies <- intersect(row.names(biopsies_ANTvsCon), unlist(ANTs_venn))
-a<-unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% Overlap_invitro_biopsies)])
-unique(Ensemble_database$Gene.type[which(Ensemble_database$Gene.stable.ID %in% Overlap_invitro_biopsies)])
-
-unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% biopsies_ANTvsCon_lncRNA)])
+Outcome <- Ensemble_database[which(Ensemble_database$Gene.stable.ID %in% Overlap_invitro_biopsies),]
+unique(Outcome$Gene.name)
+unique(Outcome$Gene.type)
 
 write.table(Overlap_invitro_biopsies, "DEgenes_Overlap_invitro_biopsies.txt",
             row.names=F,col.names=F,sep="\t", quote=FALSE)
 
-#intersect(row.names(biopsies_ANTvsCon), ANTs_venn$`DOX_The:EPI_The:IDA_The:DOX_Tox:EPI_Tox:IDA_Tox`)
-
+# identify the DE lncRNA biopsies is differential express in which in vitro condition 
+for (i in names(ANTs_venn)) {
+  if (length(which(ANTs_venn[[i]] %in% "ENSG00000233478")) >0) print(i)
+}
 ## stop here -----------------------------------------------------
 # Figure 1 B: PCA plot for biopsies data: low percetage --> mor to dendrgraom? --------------
 norm_data_biopsies_v1    <- get.remove_gene_low_express(norm_data_biopsies, 0)
 get.pca(t(norm_data_biopsies_v1 ), 
         paste0(metadata$Type, "_",metadata$Treat.with),
         name = "Biopsies samples have RNAseq")
+library(tidyverse)
+library(dendextend)
+library(viridis)
+clust_data <- merge(metadata, t(norm_data_biopsies_v1), by = "row.names")
+rownames(clust_data) <- paste0(clust_data$Biopsies_type, substring(clust_data$Row.names, 12))
+clust_data <- clust_data[, -c(1:4)]
 
-dend <- t(norm_data_biopsies_v1) %>% dist %>% hclust("mcquitty") %>% as.dendrogram 
+dend <- clust_data[, -1] %>% scale %>% dist %>% hclust("ward.D") %>% as.dendrogram %>% 
+  set("branches_lwd", 2) %>% set("labels_cex", 0.8)
+groupCodes <- clust_data$Biopsies_type
+colorCodes <- viridis(5)[1:3]
+names(colorCodes) <- unique(groupCodes)
+labels_colors(dend) <- colorCodes[groupCodes][order.dendrogram(dend)]
+par(mar=c(5.1, 4, 4.1, 15))
 plot(dend, horiz = TRUE)
 
 # Figure 1 C: Count for gene expression in each gene type in in vitro data
@@ -290,7 +309,7 @@ for (i in conditions) {
   DE_lncRNAs_conditions[[i]] <- unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% lncRNA_tem)])
 }
 
-# stop here ----------------------------
+# stop here ---------------------------- Need the t-test for each lncRNA + figure 4
 # bar chart
 #par(mar=c(5,5,5,1))
 #barplot(DE_gene_types, las = 1, cex.names = .9, col = c("orange","light green", "blue"),
