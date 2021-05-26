@@ -200,58 +200,67 @@ print.geneExpression <- function(Selected_data, file_names) {
   dev.off()
 }
 
-print.Log2geneExpression <- function(Selected_data) {
+make.order_sample_byIDs <- function(data, sample_type, id_type) {
+  output <- data[which(data$Biopsies_type == sample_type),]
+  output <- output[order(as.numeric(output[,id_type])),]
+  return(output)
+}
+
+get.Log2FC <- function(Selected_lncRNA, norm_data_invitro, norm_data_biopsies, metadata_biopsies) {
   library("plyr")						
   library("ggplot2")		
   library("gridExtra")
   library("magrittr")
   library("dplyr")
+  library("ggpubr")
   
-  Log_Selected_data <- get.log(Selected_data, 2)
-  
-  metadata <- data.frame(generate_metadata_for_sample(colnames(Selected_data)), stringsAsFactors=FALSE)
+  # in vitro
+  Selected_data_invitro     <- Select_if_in_specific_list(norm_data_invitro, Selected_lncRNA)
+  Log_invitro <- get.log(Selected_data_invitro, 2)
+  metadata <- data.frame(generate_metadata_for_sample(colnames(Log_invitro)), stringsAsFactors=FALSE)
   metadata$Dose <- paste0(metadata$Compound, "_", metadata$Dose)
   
+  # biopsies
+  Selected_data_biopsies <- Select_if_in_specific_list(norm_data_biopsies, Selected_lncRNA)
+  Log_biopsies <- get.log(Selected_data_biopsies, 2)
+  
+  # plot
   plist <- list()
-  for(i in rownames(Selected_data)) {
-    expression_tem  <- as.data.frame(cbind(metadata, Selected_data[i,]))
+  for(i in Selected_lncRNA) {
+    # invitro
+    Log_invitro_tem  <- as.data.frame(cbind(metadata, Log_invitro[i,]))
+    Log_invitro_mean <- ddply(Log_invitro_tem, ~Dose+Time, summarise,
+                              Mean = mean(`Log_invitro[i, ]`, na.rm = TRUE))
     
-    Mean_tem        <- ddply(expression_tem, ~Dose+Time, summarise, 
-                             Mean = mean(`Selected_data[i, ]`, na.rm = TRUE), sd = sd(`Selected_data[i, ]`, na.rm = TRUE))
+    Control_value <- rbind(Log_invitro_mean[c(1:7),], Log_invitro_mean[c(1:6),],
+                           Log_invitro_mean[c(1:7),], Log_invitro_mean[c(1:6),],
+                           Log_invitro_mean[c(1:7),], Log_invitro_mean[c(1:6),])
+    Log2FC_invitro <- Log_invitro_mean %>% filter(Dose != "Con_DF2")
+    Log2FC_invitro$Log2FC <- Log2FC_invitro$Mean - Control_value$Mean
     
-    Log_expression_tem <- as.data.frame(cbind(metadata, Log_Selected_data[i,]))
-    Log_Mean_tem       <- ddply(Log_expression_tem, ~Dose+Time, summarise, 
-                                Mean = mean(`Log_Selected_data[i, ]`, na.rm = TRUE), sd = sd(`Log_Selected_data[i, ]`, na.rm = TRUE))
-    plist[[i]]<- ggplot(Log_Mean_tem, aes(x = Time, y = Mean, colour = Dose, group = Dose)) + 
-      geom_line() + geom_point() + geom_errorbar(aes(ymin = Mean-sd, ymax= Mean+sd), width=.2,position=position_dodge(0.05)) +
-      xlab("Time (hours)") + ylab("Log2 expression value") + ggtitle(i) +  theme_bw()
+    # biopsies
+    Log_biopsies_tem  <- merge(metadata_biopsies, Log_biopsies[i,], by = "row.names")
+    biopsy_controls <- make.order_sample_byIDs(Log_biopsies_tem, "Control", "SID")
+    biopsy_ANTs <- make.order_sample_byIDs(Log_biopsies_tem, "LateCardiotoxicity_with_ANT", "Matched.to.SID")
+    Log2FC <- as.data.frame(biopsy_ANTs[,8] - biopsy_controls[,8])
+    names(Log2FC) <- "Log2FC"
+    
+    # arange plot
+    gene_name <- unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID==i)])
+    
+    plot_invitro <- ggplot(Log2FC_invitro, aes(x = Time, y = Log2FC, colour = Dose, group = Dose)) + 
+      geom_line() + geom_point() + xlab("Time (hours)") + ylab("Log2FC of read counts") +
+      geom_hline(yintercept=0, linetype="dashed", color = "black") + 
+      ggtitle(gene_name) +  theme_bw()
+    
+    plot_biopsies <- ggplot(Log2FC, aes(x= "", y=Log2FC)) +  geom_boxplot() + ggtitle(gene_name) +
+      theme_bw() + geom_hline(yintercept=0, linetype="dashed", color = "black")
+    
+    plist[[i]] <- ggarrange(plot_invitro, plot_biopsies, widths = c(8,1.5))
   }
-  ml <- marrangeGrob(plist, nrow=nrow(Selected_data)/2, ncol=2)
+  ml <- marrangeGrob(plist, nrow=4, ncol=4)
+  pdf("Figure4_Log2FC.pdf", width=25,height=12)
   print(ml)
-}
-
-
-get.lncRNA_corrRNA_his <- function(data, lncRNA, samples = NULL) {
-  cor_lncRNA <- cor(t(data), data[lncRNA,])
-  hist(cor_lncRNA, main= paste0("Histogram for ", lncRNA, " ", samples), 
-       xlab="Correlation", ylab = "Number of RNA",
-       border="blue", col="green", xlim=c(-1, 1), las=1)
-}
-
-print.lncRNA_corrRNA_condition <- function(Selected_list, norm_data, file_names) {
-  library("gridExtra")
-  library("magrittr")
-  
-  pdf(file_names, onefile = TRUE, width = 8)
-  
-  for(lncRNA in Selected_list) {
-    get.lncRNA_corrRNA_his(norm_data, lncRNA, "totalANT")
-    for(drug in c("DOX", "EPI", "IDA")) {
-      norm_data_temp <- cbind(norm_data[,grep("Con", colnames(norm_data))],
-                              norm_data[,grep(drug, colnames(norm_data))])
-      get.lncRNA_corrRNA_his(norm_data_temp, lncRNA, paste0("in ", drug, "-Con"))
-    }
-  }
   dev.off()
 }
 
@@ -286,24 +295,8 @@ get.lncRNA <- function(data) {
   return(output)
 }
 
-get.cor_lncRNA_phenotype <- function(heart_failure_items, Biopsies_lncRNA_data) {
-  output <- c()
-  for (i in colnames(heart_failure_items)) {
-    for(lncRNA in rownames(Biopsies_lncRNA_data)) {
-      cor_temp <- cor(as.numeric(Biopsies_lncRNA_data[lncRNA,]),
-                      as.numeric(heart_failure_items[,i]), use=p)
-      if (is.na(cor_temp) != TRUE & abs(cor_temp )>0.6) {
-        output<- rbind(output, c(i, lncRNA, cor_temp))
-        #print(i)
-        #print(lncRNA)
-        #print(cor_temp)
-      }
-    }
-  }
-  return(output)
-}
-
 get.pca <- function(data, condition, name) {
+  library(factoextra)
   data[is.na(data)] <- 0
   res.pca <- prcomp(data, scale = TRUE)
   fviz_pca_ind(res.pca, geom="point",  pointsize = 2, 
