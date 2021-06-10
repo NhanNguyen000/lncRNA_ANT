@@ -225,6 +225,13 @@ for(drug in names(drug_outcome)) {
 
 #write.table(Ensemble_database$Gene.stable.ID, "Genes_background.txt",
 #            row.names=F,col.names=F,sep="\t", quote=FALSE)
+# check the p-adj value:
+which((drug_ImpulseDE2Result$DOX_The$padj<0.01) == F)
+which((drug_ImpulseDE2Result$DOX_Tox$padj<0.01) == F)
+which((drug_ImpulseDE2Result$EPI_The$padj<0.01) == F)
+which((drug_ImpulseDE2Result$EPI_Tox$padj<0.01) == F)
+which((drug_ImpulseDE2Result$IDA_The$padj<0.01) == F)
+which((drug_ImpulseDE2Result$IDA_Tox$padj<0.01) == F)
 
 # Figure 1D: Pie chart - overlapped differentially expressed genes --------------------------
 ANTs_venn <-get.vennDiam(drug_ImpulseDE2Result, names(drug_ImpulseDE2Result))
