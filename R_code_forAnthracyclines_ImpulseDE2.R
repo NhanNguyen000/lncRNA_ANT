@@ -98,7 +98,7 @@ rownames(Biopsies_metadata.pca)<- Biopsies_sample_names
 get.pca(Biopsies_metadata.pca, 
         paste0(Biospies_info_All$Type, "_",Biospies_info_All$Treat.with),
         name = "Metadata of the biopsies samples")
-
+# Figure S1 ----------------------------------------
 get.pca(Biopsies_metadata.pca, 
         paste("Batch", Biospies_info_All$RNA.seq.Batch),
         name = "Metadata of the biopsies samples")
