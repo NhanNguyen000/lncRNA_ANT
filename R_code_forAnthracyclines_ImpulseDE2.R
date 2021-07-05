@@ -223,6 +223,17 @@ for(drug in names(drug_outcome)) {
   drug_ImpulseDE2Result[[drug]] <- outcome_temp
 }
 
+DE_lncRNAs <- list()
+for (condition in names(drug_ImpulseDE2Result)) {
+  lncRNA_tem <- get.lncRNA(drug_ImpulseDE2Result[[condition]])
+  DE_lncRNAs[[condition]] <- unique(Ensemble_database$Gene.name[which(Ensemble_database$Gene.stable.ID %in% lncRNA_tem)])
+}
+
+library(dplyr)
+DE_lncRNAs_list <- lapply(DE_lncRNAs, function(x) x[1: max(sapply(DE_lncRNAs, length))]) %>% do.call(cbind, .) 
+write.xlsx(DE_lncRNAs_list, file = "outcome.xlsx", sheetName = "DE_lncRNAs_list", 
+           col.names = TRUE, row.names = FALSE, append = TRUE)
+
 #write.table(Ensemble_database$Gene.stable.ID, "Genes_background.txt",
 #            row.names=F,col.names=F,sep="\t", quote=FALSE)
 # check the p-adj value:
