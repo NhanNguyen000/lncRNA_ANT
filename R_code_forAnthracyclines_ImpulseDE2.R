@@ -43,10 +43,14 @@ library("scales")
 dend <- t(norm_data_v1) %>% scale %>% dist %>% hclust("ward.D") %>% as.dendrogram %>% 
   set("branches_lwd", 2) %>% set("labels_cex", 0.8)
 groupCodes <- substr(colnames(norm_data_v1), 1, 7)
-colorCodes <- hue_pal()(8)[2:8]
+# colorCodes <- hue_pal()(8)[2:8] # change to the new color palette below after the manuscript revision
+colorCodes <- c("#50223b", 
+                "#CD9600", "#d87876",
+                "#27be35", "#00A9FF",
+                "#C77CFF", "#FF61CC")
 names(colorCodes) <- unique(groupCodes)
 labels_colors(dend) <- colorCodes[groupCodes][order.dendrogram(dend)]
-#pdf("Figure1A.pdf", height = 20, width = 8)
+pdf("Figure1A_revision.pdf", height = 20, width = 8)
 par(mar=c(5.1, 10, 4.1, 15))
 plot(dend, horiz = TRUE)
 dev.off()
@@ -375,5 +379,4 @@ metadata_biopsies_filled <- metadata_biopsies[which(metadata_biopsies$SID %in% m
 
 get.Log2FC(Selected_lncRNA, norm_data_invitro,
            norm_data_biopsies, metadata_biopsies_filled)
-
 
