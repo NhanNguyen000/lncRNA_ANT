@@ -7,6 +7,7 @@ This data analysis workflow is for the pulication: Nguyen, Nhan et al. "Transcri
 
 ## Instructions
 - The **data** folder stores data information files
+- The **prepared_samples** folder contain bash script to process raw data (.fastq files) before run the analysis code in R
 - The **R_code_for_ImpulseDE2_run_in_ngs_cal_NN_2020Mar12.txt** is the R script to run code for ImpulseDE2 - the older version
 - The **R_code_for_ImpulseDE2_in_ngs_cal_NN_2020Apr02** is the R script to run code for ImpulseDE2 - the updated version
 - The **R_code_forAnthracyclines_ImpulseDE2** is the R script to run the data analysis after ImpulseDE2 analysis
