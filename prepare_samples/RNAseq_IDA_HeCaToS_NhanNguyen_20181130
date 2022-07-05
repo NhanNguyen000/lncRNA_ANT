@@ -1,0 +1,177 @@
+#!/bin/bash
+## This script uses FastQC version 0.11.7, Trimmomatic version 0.36, Bowtie2 version 2.3.4.1, RSEM version 1.3.1 and Ensembl Ch38_93
+## This srcipt run for real data
+
+## Outline of the script:
+# 1. Set path to the tools, parameters, input, output
+# 2. Run FastQC on the raw data
+# 3. Run Trimmomatic on the raw data
+# 4. Run FastQC on the trimmed data
+# 5. Run the RSEM on the trimmed data
+# 6. Move output files to the determined folders
+
+##-----------------------------------------------------------------------------
+
+## 1. Set path to the tools, parameters, input, output:
+# Tools in ngs-calc & ngs-ada:
+fastqc=/share/tools/FastQC-0.11.7/fastqc
+trimmomatic=/share/tools/Trimmomatic-0.36/
+bowtie=/share/tools/bowtie2-2.3.4.1/
+RSEM=/share/tools/RSEM-1.3.1/
+
+
+# Parameters:
+CPU=15
+
+# Genome reference:
+gtf=/ngs-data/analysis/hecatos/NhanNguyen/Genome/*.gtf
+fasta=/ngs-data/analysis/hecatos/NhanNguyen/Genome/*.fa
+reference=Hsa_GRCh38_93_dna_primary_assembly_2018
+transcriptome=/ngs-data/analysis/hecatos/NhanNguyen/Genome/Genome_Reference_Bowtie2_2.3.4.1/${reference}
+
+# Input:
+# real data:
+data_dir=/ngs-data/data/hecatos/Cardiac/Idarubicin/TotalRNA/concatenated/
+
+drug_dose1_input=Ida_The_
+drug_dose2_input=Ida_Tox_
+
+drug_dose1=IDA_The_
+drug_dose2=IDA_Tox_
+
+data_number1="002_1 002_2 002_3 008_1 008_2 008_3 024_1 024_2 024_3 072_1 072_2 072_3 168_1 168_2 168_3 240_1 240_2 240_3 336_1 336_2 336_3"
+data_number2="002_1 002_2 002_3 008_1 008_2 008_3 024_1 024_2 024_3 072_1 072_2 072_3 168_1 168_2 168_3 240_1 240_2 240_3"
+
+
+# Output:
+cd /ngs-data/analysis/hecatos/NhanNguyen/Cardiac/Idarubicin/TotalRNA/
+
+
+# Make folders to save each specific output data
+mkdir FastQC_RawData 
+mkdir FastQC_TrimmedData
+mkdir Trim
+mkdir Genes
+mkdir Isoforms
+mkdir Alignments
+
+# Make directory to the specific output directories
+output_dir=/ngs-data/analysis/hecatos/NhanNguyen/Cardiac/Idarubicin/TotalRNA/
+
+fastqc_rawdata=${output_dir}FastQC_RawData/ 
+fastqc_trimmeddata=${output_dir}FastQC_TrimmedData/
+trim_log=${output_dir}
+trimmed=${output_dir}Trim/
+genes=${output_dir}Genes/
+isoforms=${output_dir}Isoforms/
+alignments=${output_dir}Alignments/
+
+##-----------------------------------------------------------------------------
+# Stared time
+echo -n "Start running FastQC for raw data: "; date
+## 2. Run FastQC on the raw data:
+cd ${output_dir}
+
+# Count the total data files
+echo -n "the total number data files:  "; ls ${data_dir} |wc -l
+
+# Add the permission for the FastQC (only need to do once time)
+#cd /share/tools/FastQC-0.11.7/ # for ngs-calc
+#cd /home/nnguyen/Tools/FastQC-0.11.7/ # for ngs-ada
+#ls -al
+#chmod 755 fastqc
+#ls -al
+
+# Run FastQC
+#${fastqc} -f fastq -t ${CPU} -o ${fastqc_rawdata} ${data_dir}*.*
+
+##------------------------------------------------------------------------------
+## 3. Run Trimmomatic on the raw data:
+echo -n "Start trimming data: "; date
+cd ${output_dir}
+
+# Trim the therapeutic dose data
+#for i in ${data_number1}
+#do
+#java -jar ${trimmomatic}Trimmomatic-0.36/trimmomatic-0.36.jar PE -threads ${CPU} -phred33 -trimlog ${trimlog}${drug_dose1}${i}_Trimlog.txt ${data_dir}${drug_dose1_input}${i}_R1.fastq.gz ${data_dir}${drug_dose1_input}${i}_R2.fastq.gz ${output_dir}${drug_dose1}${i}_R1_trimmed_PE.fastq.gz ${output_dir}${drug_dose1}${i}_R1_trimmed_SE.fastq.gz ${output_dir}${drug_dose1}${i}_R2_trimmed_PE.fastq.gz ${output_dir}${drug_dose1}${i}_R2_trimmed_SE.fastq.gz ILLUMINACLIP:${trimmomatic}trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 HEADCROP:12
+#done
+
+# Trim the toxic dose data
+#for i in ${data_number2}
+#do
+#java -jar ${trimmomatic}Trimmomatic-0.36/trimmomatic-0.36.jar PE -threads ${CPU} -phred33 -trimlog ${trimlog}${drug_dose2}${i}_Trimlog.txt ${data_dir}${drug_dose2_input}${i}_R1.fastq.gz ${data_dir}${drug_dose2_input}${i}_R2.fastq.gz ${output_dir}${drug_dose2}${i}_R1_trimmed_PE.fastq.gz ${output_dir}${drug_dose2}${i}_R1_trimmed_SE.fastq.gz ${output_dir}${drug_dose2}${i}_R2_trimmed_PE.fastq.gz ${output_dir}${drug_dose2}${i}_R2_trimmed_SE.fastq.gz ILLUMINACLIP:${trimmomatic}trimmomatic-0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36 HEADCROP:12
+#done
+
+##------------------------------------------------------------------------------
+
+## 4. Run FastQC on the trimmed data:
+echo -n "Start running FastQC for trimmed data: "; date
+
+#${fastqc} -f fastq -t ${CPU} -o ${fastqc_trimmeddata} ${output_dir}*_trimmed_PE.fastq.gz
+
+
+##------------------------------------------------------------------------------
+
+## 5. Run the RSEM on the trimmed data:
+echo -n "Start running RSEM: "; date
+# Install the RSEM (only need to do once time)
+#cd ${RSEM}
+#make NO_TBB=1 ## or make -j 8
+#make ebseq
+
+# Add path to RSEM
+export PATH=$PATH:${RSEM}
+echo $PATH
+
+# Install the Bowtie2 (only need to do 1 time)
+#cd ${bowtie}
+#make NO_TBB=1
+
+# Add path to Bowtie2
+export PATH=$PATH:${bowtie}
+echo $PATH
+
+## Built the transcriptome reference (only need to do once time)
+#${RSEM}rsem-prepare-reference --gtf ${gtf} --bowtie2 --bowtie2-path ${bowtie} ${fasta} ${transcriptome}
+
+## Run rsem-calculate-expression
+cd  ${output_dir}
+
+for i in ${data_number1}
+do 
+${RSEM}rsem-calculate-expression -p ${CPU} --bowtie2 --bowtie2-path ${bowtie} --bowtie-chunkmbs 1024 --paired-end ${output_dir}${drug_dose1}${i}_R1_trimmed_PE.fastq.gz ${output_dir}${drug_dose1}${i}_R2_trimmed_PE.fastq.gz ${transcriptome} ${drug_dose1}${i} > ${drug_dose1}${i}_RSEM.txt
+done
+
+for i in ${data_number2}
+do 
+${RSEM}rsem-calculate-expression -p ${CPU} --bowtie2 --bowtie2-path ${bowtie} --bowtie-chunkmbs 1024 --paired-end ${output_dir}${drug_dose2}${i}_R1_trimmed_PE.fastq.gz ${output_dir}${drug_dose2}${i}_R2_trimmed_PE.fastq.gz ${transcriptome} ${drug_dose2}${i} > ${drug_dose2}${i}_RSEM.txt
+done
+
+##------------------------------------------------------------------------------
+
+## 6. Move output files to the determined folders
+echo -n "Moving files"; date
+
+# Move the trimed file
+cd  ${output_dir}
+mv *fastq.gz ${trimmed}
+mv *Trimlog.txt ${trimmed}
+
+
+# Move the RSEM output files
+cd  ${output_dir}
+mv *.genes.results ${genes}
+mv *.isoforms.results ${isoforms}
+mv *.transcript.bam ${alignments}
+
+# Finished time
+echo -n "Finish at: "; date
+
+##--------------------------------------------------------------------
+# Make the count matrix of all sample for futher analysis
+
+# the matrix of the expected count of the genes of all input data 
+/share/tools/RSEM-1.3.1/rsem-generate-data-matrix /ngs-data/analysis/hecatos/NhanNguyen/Cardiac/Idarubicin/TotalRNA/Genes/*.genes.results > /ngs-data/analysis/hecatos/NhanNguyen/Cardiac/Idarubicin/TotalRNA/Genes/IDA_genes.counts.matrix
+
+# the matrix of the expected count of the isoforms of all input data 
+/share/tools/RSEM-1.3.1/rsem-generate-data-matrix /ngs-data/analysis/hecatos/NhanNguyen/Cardiac/Idarubicin/TotalRNA/Isoforms/*.isoforms.results > /ngs-data/analysis/hecatos/NhanNguyen/Cardiac/Idarubicin/TotalRNA/Isoforms/IDA_isoforms.counts.matrix
